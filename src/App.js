@@ -1,6 +1,7 @@
-/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+import { useEffect, useState } from 'react';
+import animeData from './api/api';
 
 const Heading = styled('h1')`
   background-color: ${props => props.bg};
@@ -11,24 +12,31 @@ const Heading = styled('h1')`
 
 const CoverImg = styled('div')`
   display: flex;
+  flex-direction: row;
   justify-content: space-evenly;
-  align-items: center;
+  
 `
 
 function App() {
+
+  const [animes, setAnimes] = useState([])
+
+  useEffect(() => {
+    animeData().then((response) => setAnimes(response.media))
+  }, []);
+
   return (
-    <div css={css`background: #ddd;`}>
-      <div css={css({ padding: 10 })}>
-        <Heading bg="#008f68" fg="#fae042">
-          Banner
-        </Heading>
-        <CoverImg>
-          <div>1</div>
-          <div>2</div>
-          <div>3</div>
-          <div>4</div>
-        </CoverImg>
-      </div>
+    <div css={css({ padding: 10 })}>
+      <Heading bg="#008f68" fg="#fae042">
+        Banner
+      </Heading>
+      <ul>
+        {animes.map((anime) => (
+          <CoverImg>
+            <img src={anime.coverImage.medium} key={anime.id} alt={anime.id} />
+          </CoverImg>
+        ))}
+      </ul>
     </div>
   );
 }

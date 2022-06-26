@@ -1,23 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
+import styled from '@emotion/styled';
+
+const Heading = styled('h1')`
+  background-color: ${props => props.bg};
+  color: ${props => props.fg};
+  display: flex; 
+  justify-content: center;
+`;
+
+const CoverImg = styled('div')`
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+`
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div css={css`background: #ddd;`}>
+      <div css={css({ padding: 10 })}>
+        <Heading bg="#008f68" fg="#fae042">
+          Banner
+        </Heading>
+        <CoverImg>
+          <div>1</div>
+          <div>2</div>
+          <div>3</div>
+          <div>4</div>
+        </CoverImg>
+      </div>
     </div>
   );
 }

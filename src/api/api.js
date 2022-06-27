@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-async function animeData(page = 1, perPage = 5, sort = 'TRENDING_DESC', status, season) {
+async function animeData(page = 1, perPage = 5, sort = 'TRENDING_DESC', seasonYear = 2022, status, season) {
     const query = `
-            query ($page: Int, $perPage: Int, $sort: [MediaSort], $status: MediaStatus, $season: MediaSeason) {
+            query ($page: Int, $perPage: Int, $sort: [MediaSort], $seasonYear: Int $status: MediaStatus, $season: MediaSeason) {
                 Page(page: $page, perPage: $perPage) {
                     pageInfo {
                         total
@@ -11,7 +11,7 @@ async function animeData(page = 1, perPage = 5, sort = 'TRENDING_DESC', status, 
                         hasNextPage
                         perPage
                     }
-                    media(type: ANIME, sort: $sort, status: $status, season: $season) {
+                    media(isAdult: false, type: ANIME, sort: $sort, seasonYear: $seasonYear, status: $status, season: $season) {
                         id
                         title {
                             romaji
@@ -31,6 +31,7 @@ async function animeData(page = 1, perPage = 5, sort = 'TRENDING_DESC', status, 
         page: page,
         perPage: perPage,
         sort: sort,
+        seasonYear: seasonYear,
         status: status,
         season: season,
     };

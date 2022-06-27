@@ -1,6 +1,7 @@
 import { Global, css } from '@emotion/react';
 // import styled from '@emotion/styled';
 import React from 'react';
+import Footer from './container/Footer';
 import Header from './container/Header';
 import MainContainer from './container/MainContainer';
 
@@ -24,6 +25,7 @@ function App() {
       <Global styles={GlobalStyles} />
       <Header />
       <MainContainer />
+      <Footer />
     </>
   );
 }

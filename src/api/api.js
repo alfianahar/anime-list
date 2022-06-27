@@ -1,22 +1,23 @@
 import axios from 'axios';
 
-async function animeData(page = 1, perPage = 10, sort = 'TRENDING_DESC') {
+async function animeData(page = 1, perPage = 5, sort = 'TRENDING_DESC', status, season) {
     const query = `
-            query ($page: Int, $perPage: Int, $sort: [MediaSort]) {
+            query ($page: Int, $perPage: Int, $sort: [MediaSort], $status: MediaStatus, $season: MediaSeason) {
                 Page(page: $page, perPage: $perPage) {
-                        pageInfo {
-                            total
-                            currentPage
-                            lastPage
-                            hasNextPage
-                            perPage
-                        }
-                        media(type: ANIME, isAdult: false , sort: $sort) {
+                    pageInfo {
+                        total
+                        currentPage
+                        lastPage
+                        hasNextPage
+                        perPage
+                    }
+                    media(type: ANIME, sort: $sort, status: $status, season: $season) {
                         id
                         title {
                             romaji
                             english
                         }
+                        siteUrl
                         bannerImage
                         coverImage {
                             medium
@@ -25,12 +26,13 @@ async function animeData(page = 1, perPage = 10, sort = 'TRENDING_DESC') {
                         status
                     }
                 }
-            }
-        `
+            }`;
     let variables = {
         page: page,
         perPage: perPage,
-        sort: sort
+        sort: sort,
+        status: status,
+        season: season,
     };
     const headers = {
         "Content-Type": "application/json",

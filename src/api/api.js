@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-async function animeData(page = 1, perPage = 5, sort = 'TRENDING_DESC', seasonYear = 2022, status, season) {
+async function animeData(page = 1, perPage = 5, sort = 'TRENDING_DESC', seasonYear, status, season) {
     const query = `
             query ($page: Int, $perPage: Int, $sort: [MediaSort], $seasonYear: Int $status: MediaStatus, $season: MediaSeason) {
                 Page(page: $page, perPage: $perPage) {

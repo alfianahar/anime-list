@@ -12,7 +12,7 @@ const CoverImg = styled('img')`
     object-fit: cover;
     border-radius: 10px;
 `
-const PopularTitle = styled('nav')`
+const SliderTitle = styled('nav')`
     display: flex;
     justify-content: space-between;
     padding-left: 1rem;
@@ -27,18 +27,43 @@ const PopularTitle = styled('nav')`
 
 const Popular = () => {
 
-    const [pops, setPops] = useState([])
+    const [trends, setTrends] = useState([]);
+    const [pops, setPops] = useState([]);
+    const [ups, setUps] = useState([]);
 
     useEffect(() => {
+        animeData(1, 10, 'POPULARITY_DESC', 2022, 'NOT_YET_RELEASED', 'SUMMER').then((response) => setTrends(response.media))
+    }, [])
+    useEffect(() => {
         animeData(1, 10, 'POPULARITY_DESC', 2022).then((response) => setPops(response.media))
+    }, [])
+    useEffect(() => {
+        animeData(1, 10, 'POPULARITY_DESC', 2022, 'NOT_YET_RELEASED', 'SUMMER').then((response) => setUps(response.media))
     }, [])
 
     return (
         <>
-            <PopularTitle>
+            <SliderTitle>
+                <h4>Trending Sekarang</h4>
+                <a href="/">Lebih banyak</a>
+            </SliderTitle>
+            <Swiper
+                slidesPerView={3.1}
+                centeredSlides={true}
+                centeredSlidesBounds={true}
+                spaceBetween={12}
+            >
+                {trends.map((anime) => (
+                    <SwiperSlide>
+                        <CoverImg src={anime.coverImage.extraLarge} alt={anime.id} />
+                        <p key={anime.id}>{anime.title.english ? anime.title.english : anime.title.romaji}</p>
+                    </SwiperSlide>
+                ))}
+            </Swiper>
+            <SliderTitle>
                 <h4>Popular Season Ini</h4>
                 <a href='/'>Lebih banyak</a>
-            </PopularTitle>
+            </SliderTitle>
             <Swiper
                 slidesPerView={3.1}
                 centeredSlides={true}
@@ -47,8 +72,25 @@ const Popular = () => {
             >
                 {pops.map((anime) => (
                     <SwiperSlide>
-                        <CoverImg src={anime.coverImage.medium} key={anime.id} alt={anime.id} />
-                        <p>{anime.title.english ? anime.title.english : anime.title.romaji}</p>
+                        <CoverImg src={anime.coverImage.extraLarge} alt={anime.id} />
+                        <p key={anime.id}>{anime.title.english ? anime.title.english : anime.title.romaji}</p>
+                    </SwiperSlide>
+                ))}
+            </Swiper>
+            <SliderTitle>
+                <h4>Akan Hadir</h4>
+                <a href='/'>Lebih banyak</a>
+            </SliderTitle>
+            <Swiper
+                slidesPerView={3.1}
+                centeredSlides={true}
+                centeredSlidesBounds={true}
+                spaceBetween={12}
+            >
+                {ups.map((anime) => (
+                    <SwiperSlide>
+                        <CoverImg src={anime.coverImage.extraLarge} alt={anime.id} />
+                        <p key={anime.id}>{anime.title.english ? anime.title.english : anime.title.romaji}</p>
                     </SwiperSlide>
                 ))}
             </Swiper>

@@ -8,8 +8,8 @@ const FooterTitle = styled('p')`
     justify-content: center;
     margin-top: 2rem;
     padding: 1rem 1rem 2rem;
+    border-top: 0.1rem solid #c2d3cd;
 `
-
 const Footer = () => {
     return (
         <FooterTitle>

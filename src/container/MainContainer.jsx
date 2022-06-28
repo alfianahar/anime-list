@@ -1,11 +1,11 @@
 import React from 'react'
-import MainPage from './MainPage'
+import Banner from './Banner'
 import Popular from './Popular'
 
 const MainContainer = () => {
     return (
         <>
-            <MainPage />
+            <Banner />
             <Popular />
         </>
     )

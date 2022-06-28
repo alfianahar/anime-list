@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "./styles.css";
 import animeData from '../api/api';
+import { NavLink } from 'react-router-dom'
 
 const CoverImg = styled('img')`
     position: relative;
@@ -32,12 +33,8 @@ const Popular = () => {
     const [ups, setUps] = useState([]);
 
     useEffect(() => {
-        animeData(1, 10, 'POPULARITY_DESC', 2022, 'NOT_YET_RELEASED', 'SUMMER').then((response) => setTrends(response.media))
-    }, [])
-    useEffect(() => {
+        animeData(1, 10).then((response) => setTrends(response.media))
         animeData(1, 10, 'POPULARITY_DESC', 2022).then((response) => setPops(response.media))
-    }, [])
-    useEffect(() => {
         animeData(1, 10, 'POPULARITY_DESC', 2022, 'NOT_YET_RELEASED', 'SUMMER').then((response) => setUps(response.media))
     }, [])
 
@@ -55,8 +52,11 @@ const Popular = () => {
             >
                 {trends.map((anime) => (
                     <SwiperSlide>
-                        <CoverImg src={anime.coverImage.extraLarge} alt={anime.id} />
-                        <p key={anime.id}>{anime.title.english ? anime.title.english : anime.title.romaji}</p>
+                        <NavLink to={`/anime/${anime.id}/${anime.title.english ? anime.title.english.replaceAll(' ', '-') : anime.title.romaji.replaceAll(' ', '-')}`} key={anime.id}>
+                            <CoverImg src={anime.coverImage.extraLarge} alt={anime.id} />
+                            <p>{anime.title.english ? anime.title.english : anime.title.romaji}</p>
+
+                        </NavLink>
                     </SwiperSlide>
                 ))}
             </Swiper>
@@ -72,8 +72,10 @@ const Popular = () => {
             >
                 {pops.map((anime) => (
                     <SwiperSlide>
-                        <CoverImg src={anime.coverImage.extraLarge} alt={anime.id} />
-                        <p key={anime.id}>{anime.title.english ? anime.title.english : anime.title.romaji}</p>
+                        <NavLink to={`/anime/${anime.id}/${anime.title.english ? anime.title.english.replaceAll(' ', '-') : anime.title.romaji.replaceAll(' ', '-')}`} key={anime.id}>
+                            <CoverImg src={anime.coverImage.extraLarge} alt={anime.id} />
+                            <p>{anime.title.english ? anime.title.english : anime.title.romaji}</p>
+                        </NavLink>
                     </SwiperSlide>
                 ))}
             </Swiper>
@@ -89,8 +91,10 @@ const Popular = () => {
             >
                 {ups.map((anime) => (
                     <SwiperSlide>
-                        <CoverImg src={anime.coverImage.extraLarge} alt={anime.id} />
-                        <p key={anime.id}>{anime.title.english ? anime.title.english : anime.title.romaji}</p>
+                        <NavLink to={`/anime/${anime.id}/${anime.title.english ? anime.title.english.replaceAll(' ', '-') : anime.title.romaji.replaceAll(' ', '-')}`} key={anime.id}>
+                            <CoverImg src={anime.coverImage.extraLarge} alt={anime.id} />
+                            <p>{anime.title.english ? anime.title.english : anime.title.romaji}</p>
+                        </NavLink>
                     </SwiperSlide>
                 ))}
             </Swiper>

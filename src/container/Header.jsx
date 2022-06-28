@@ -1,4 +1,5 @@
 import styled from '@emotion/styled'
+import { NavLink } from 'react-router-dom'
 import React from 'react'
 
 const Navigation = styled('nav')`
@@ -16,7 +17,7 @@ const Navigation = styled('nav')`
 const Header = () => {
     return (
         <Navigation>
-            <div>Logo</div>
+            <NavLink to="/">Logo</NavLink>
             <div>Menu</div>
         </Navigation>
     )

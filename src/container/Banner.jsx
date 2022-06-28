@@ -57,7 +57,7 @@ const Banner = () => {
             >
                 {animes.map((anime) => (
                     <SwiperSlide>
-                        <BannerImg src={anime.bannerImage ? anime.coverImage.extraLarge : anime.bannerImage} key={anime.id} alt={anime.id} />
+                        <BannerImg src={anime.bannerImage ? anime.bannerImage : anime.coverImage.extraLarge} key={anime.id} alt={anime.id} />
                         <BannTitle>
                             {anime.title.english ? anime.title.english : anime.title.romaji}
                         </BannTitle>

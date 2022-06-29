@@ -1,5 +1,5 @@
 import React from 'react'
-import { matchRoutes, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 
 const usePathname = () => {
     const location = useLocation();

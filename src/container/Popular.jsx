@@ -51,8 +51,8 @@ const Popular = () => {
                 spaceBetween={12}
             >
                 {trends.map((anime) => (
-                    <SwiperSlide>
-                        <NavLink to={`/anime/${anime.id}/${anime.title.english ? anime.title.english.replaceAll(' ', '-') : anime.title.romaji.replaceAll(' ', '-')}`} key={anime.id}>
+                    <SwiperSlide key={anime.id}>
+                        <NavLink to={`/anime/${anime.id}/${anime.title.english ? anime.title.english.replaceAll(' ', '-') : anime.title.romaji.replaceAll(' ', '-')}`}>
                             <CoverImg src={anime.coverImage.extraLarge} alt={anime.id} />
                             <p>{anime.title.english ? anime.title.english : anime.title.romaji}</p>
 
@@ -71,8 +71,8 @@ const Popular = () => {
                 spaceBetween={12}
             >
                 {pops.map((anime) => (
-                    <SwiperSlide>
-                        <NavLink to={`/anime/${anime.id}/${anime.title.english ? anime.title.english.replaceAll(' ', '-') : anime.title.romaji.replaceAll(' ', '-')}`} key={anime.id}>
+                    <SwiperSlide key={anime.id}>
+                        <NavLink to={`/anime/${anime.id}/${anime.title.english ? anime.title.english.replaceAll(' ', '-') : anime.title.romaji.replaceAll(' ', '-')}`}>
                             <CoverImg src={anime.coverImage.extraLarge} alt={anime.id} />
                             <p>{anime.title.english ? anime.title.english : anime.title.romaji}</p>
                         </NavLink>
@@ -90,8 +90,8 @@ const Popular = () => {
                 spaceBetween={12}
             >
                 {ups.map((anime) => (
-                    <SwiperSlide>
-                        <NavLink to={`/anime/${anime.id}/${anime.title.english ? anime.title.english.replaceAll(' ', '-') : anime.title.romaji.replaceAll(' ', '-')}`} key={anime.id}>
+                    <SwiperSlide key={anime.id}>
+                        <NavLink to={`/anime/${anime.id}/${anime.title.english ? anime.title.english.replaceAll(' ', '-') : anime.title.romaji.replaceAll(' ', '-')}`}>
                             <CoverImg src={anime.coverImage.extraLarge} alt={anime.id} />
                             <p>{anime.title.english ? anime.title.english : anime.title.romaji}</p>
                         </NavLink>

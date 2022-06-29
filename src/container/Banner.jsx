@@ -7,6 +7,7 @@ import "./styles.css";
 import { Pagination, Autoplay } from "swiper";
 import styled from "@emotion/styled";
 import animeData from "../api/api";
+import { NavLink } from 'react-router-dom'
 
 const BannerImg = styled('img')`
     position: relative;
@@ -56,11 +57,13 @@ const Banner = () => {
                 modules={[Pagination, Autoplay]}
             >
                 {animes.map((anime) => (
-                    <SwiperSlide>
-                        <BannerImg src={anime.bannerImage ? anime.bannerImage : anime.coverImage.extraLarge} key={anime.id} alt={anime.id} />
-                        <BannTitle>
-                            {anime.title.english ? anime.title.english : anime.title.romaji}
-                        </BannTitle>
+                    <SwiperSlide key={anime.id}>
+                        <NavLink to={`/anime/${anime.id}/${anime.title.english ? anime.title.english.replaceAll(' ', '-') : anime.title.romaji.replaceAll(' ', '-')}`}>
+                            <BannerImg src={anime.bannerImage ? anime.bannerImage : anime.coverImage.extraLarge} alt={anime.id} />
+                            <BannTitle>
+                                {anime.title.english ? anime.title.english : anime.title.romaji}
+                            </BannTitle>
+                        </NavLink>
                     </SwiperSlide>
                 ))}
             </Swiper>

@@ -4,7 +4,7 @@ import styled from '@emotion/styled'
 import React from 'react'
 
 const FooterTitle = styled('p')`
-    font-family: cursive;
+    font-family: monospace;
     font-size: 1rem;
     display: flex;
     justify-content: center;

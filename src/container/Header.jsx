@@ -21,7 +21,7 @@ const Header = () => {
     return (
         <Navigation>
             <NavLink to="/">
-                <h2 css={css`font-family: cursive;`}>Ani-Zoune</h2>
+                <h2 css={css`font-family: cursive;`}>AniZoune</h2>
             </NavLink>
             <div>Menu</div>
         </Navigation>

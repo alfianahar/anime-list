@@ -18,6 +18,9 @@ const GlobalStyles = css`
   body {
     background-color: #0B1622;
     color: #c2d3cd;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    letter-spacing: 0.025em;
   }
   a:link {
     color: #c2d3cd;
@@ -89,7 +92,6 @@ function App() {
                   <LoadContainerFinish>
                     <ImgLoad src={loading} alt='load' />
                   </LoadContainerFinish>
-
               }
               <Header />
               <Outlet />

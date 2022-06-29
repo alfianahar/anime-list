@@ -7,6 +7,7 @@ import Header from './container/Header';
 import AnimePage from './page/AnimePage';
 import MainPage from './page/MainPage';
 import loading from './container/loading.svg'
+import CollectionPage from './page/CollectionPage';
 
 const GlobalStyles = css`
   * {
@@ -100,6 +101,7 @@ function App() {
           }>
             <Route path="/" element={<MainPage />} />
             <Route path="/anime/*" element={<AnimePage />} />
+            <Route path="/user/*" element={<CollectionPage />} />
             <Route
               path="*"
               element={

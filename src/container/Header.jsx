@@ -23,7 +23,9 @@ const Header = () => {
             <NavLink to="/">
                 <h2 css={css`font-family: cursive;`}>AniZoune</h2>
             </NavLink>
-            <div>Menu</div>
+            <NavLink to="/user/">
+                <h2>users</h2>
+            </NavLink>
         </Navigation>
     )
 }

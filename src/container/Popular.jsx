@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "./styles.css";
-import animeData from '../api/api';
+import { animeData } from '../api/api';
 import { NavLink } from 'react-router-dom'
 
 const CoverImg = styled('img')`
@@ -37,7 +37,6 @@ const Popular = () => {
         animeData(1, 10, 'POPULARITY_DESC', 2022).then((response) => setPops(response.media))
         animeData(1, 10, 'POPULARITY_DESC', 2022, 'NOT_YET_RELEASED', 'SUMMER').then((response) => setUps(response.media))
     }, [])
-
     return (
         <>
             <SliderTitle>

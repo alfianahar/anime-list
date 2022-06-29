@@ -6,7 +6,7 @@ import "swiper/css/pagination";
 import "./styles.css";
 import { Pagination, Autoplay } from "swiper";
 import styled from "@emotion/styled";
-import animeData from "../api/api";
+import { animeData } from "../api/api";
 import { NavLink } from 'react-router-dom'
 
 const BannerImg = styled('img')`

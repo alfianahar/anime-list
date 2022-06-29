@@ -1,6 +1,9 @@
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { NavLink } from 'react-router-dom'
 import React from 'react'
+
 
 const Navigation = styled('nav')`
     display: flex;
@@ -17,7 +20,9 @@ const Navigation = styled('nav')`
 const Header = () => {
     return (
         <Navigation>
-            <NavLink to="/">Logo</NavLink>
+            <NavLink to="/">
+                <h2 css={css`font-family: cursive;`}>Ani-Zoune</h2>
+            </NavLink>
             <div>Menu</div>
         </Navigation>
     )

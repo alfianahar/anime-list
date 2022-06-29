@@ -100,7 +100,7 @@ const AnimePage = () => {
                         <div css={css`width: 48%`}>
                             <p css={css` ${subtitle}`}>Status</p>
                             <DescriptionBox >
-                                <p>{detail.status} </p>
+                                <p>{detail.status.charAt(0).toUpperCase() + detail.status.substr(1).toLowerCase().replace(/_/g, ' ')} </p>
                             </DescriptionBox>
                         </div>
                     </div>

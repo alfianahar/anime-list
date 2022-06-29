@@ -41,7 +41,7 @@ const Popular = () => {
         <>
             <SliderTitle>
                 <h4>Trending Sekarang</h4>
-                <a href="/">Lebih banyak</a>
+                <a href="/trendinglist">Lebih banyak</a>
             </SliderTitle>
             <Swiper
                 slidesPerView={3.1}
@@ -61,7 +61,7 @@ const Popular = () => {
             </Swiper>
             <SliderTitle>
                 <h4>Popular Season Ini</h4>
-                <a href='/'>Lebih banyak</a>
+                <a href='/popularlist'>Lebih banyak</a>
             </SliderTitle>
             <Swiper
                 slidesPerView={3.1}
@@ -80,7 +80,7 @@ const Popular = () => {
             </Swiper>
             <SliderTitle>
                 <h4>Akan Hadir</h4>
-                <a href='/'>Lebih banyak</a>
+                <a href='/upcominglist'>Lebih banyak</a>
             </SliderTitle>
             <Swiper
                 slidesPerView={3.1}

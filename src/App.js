@@ -98,6 +98,14 @@ function App() {
           }>
             <Route path="/" element={<MainPage />} />
             <Route path="/anime/*" element={<AnimePage />} />
+            <Route
+              path="*"
+              element={
+                <main style={{ padding: "1rem" }}>
+                  <p>Page Under Construction</p>
+                </main>
+              }
+            />
           </Route>
         </Routes>
 

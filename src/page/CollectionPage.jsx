@@ -10,6 +10,12 @@ const CollectionPage = () => {
     const [users, setUsers] = useState([])
     const usersCollectionRef = collection(db, "users")
 
+    // const docRef = doc(db, 'users', 'L1L49RlWDcURYJn8vKDv');
+    // const colRef = collection(docRef, 'col1')
+    // // addDoc(colRef, { animeId: 21, timestamp: serverTimestamp() })
+
+
+
     const createUser = async () => {
         await addDoc(usersCollectionRef, { name: newName, age: Number(newAge) })
     }
@@ -28,7 +34,9 @@ const CollectionPage = () => {
     useEffect(() => {
         const getUser = async () => {
             const data = await getDocs(usersCollectionRef)
+            // console.log(data)
             setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+            // console.log(users)
         }
 
         getUser();
@@ -37,7 +45,7 @@ const CollectionPage = () => {
 
     return (
         <div>
-            <input
+            {/* <input
                 placeholder='Name...'
                 onChange={(e) => {
                     setNewName(e.target.value)
@@ -62,7 +70,7 @@ const CollectionPage = () => {
                     </div>
 
                 )
-            })}
+            })} */}
         </div>
     )
 }

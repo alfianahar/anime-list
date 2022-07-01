@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { animebyId } from '../api/api';
+import ButtonDrawer from '../components/ButtonDrawer';
 
 const usePathname = () => {
     const location = useLocation();
@@ -60,6 +61,19 @@ const DescriptionBox = styled('div')`
     margin-bottom: 0.75rem;
 `
 
+// const ButtonAddList = styled('button')`
+//     padding-top: 1rem;
+//     padding-bottom: 1rem;
+//     padding-left: 1rem;
+//     padding-right: 1rem;
+//     font-size: 1.1rem;
+//     font-weight: 700;
+//     background: #3db4f2;
+//     color: #0B1622;
+//     border-radius: 10px;
+//     margin-bottom: 1rem;
+// `
+
 const AnimePage = () => {
 
     const currentPath = usePathname().substring(
@@ -84,6 +98,7 @@ const AnimePage = () => {
                 <AnimePageContainer>
                     <CoverImg src={detail.coverImage.extraLarge} alt={detail.id} />
                     <p css={css` ${title} `} >{detail.title.english ? detail.title.english : detail.title.romaji}</p>
+                    <ButtonDrawer animeid={detail.id} />
                     <div>
                         <p css={css` ${subtitle}`}>Genres</p>
                         <DescriptionBox >

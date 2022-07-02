@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import Input from '@mui/material/Input';
 import { db } from '../firebase-config'
-import { collection, getDocs, addDoc, updateDoc, doc, serverTimestamp, getDoc } from 'firebase/firestore'
+import { collection, addDoc, doc, serverTimestamp, setDoc, onSnapshot } from 'firebase/firestore'
 
 const ariaLabel = { 'aria-label': 'description' };
 
@@ -28,29 +28,44 @@ export default function ButtonDrawer({ animeid }) {
 
     const [users, setUsers] = useState([])
     const [newCol, setNewCol] = useState('')
+    const [existingCol, setExistingCol] = useState('')
+    const ref = useRef(true)
 
-    const docRef = doc(db, 'users', 'QhQUrl4OrOAu6p5ikEGn');
-    // const allColRef = doc(db, 'users/QhQUrl4OrOAu6p5ikEGn');
-    console.log(docRef)
+    const docRef = doc(db, 'users', 'user1');
+    const ColNameRef = collection(db, 'users', 'user1', 'colName');
+    const AnimeListRef = collection(db, 'users', 'user1', 'animeList');
+    // console.log(docRef)
 
     const createCol = async () => {
-        let colRef = collection(docRef, newCol)
         // console.log(colRef)
-        await addDoc(colRef, { animeId: animeid, timestamp: serverTimestamp() })
-        console.log(newCol)
+        await setDoc(doc(ColNameRef, newCol), { colName: newCol })
+        await addDoc(AnimeListRef, { colName: newCol, animeId: animeid, timestamp: serverTimestamp() })
     }
+
+    const addAnimeinCol = async () => {
+        // await addDoc(AnimeListRef, { colName: existingCol, animeId: animeid, timestamp: serverTimestamp() })
+        console.log(existingCol + ' run')
+    }
+
 
     useEffect(() => {
         const getUser = async () => {
-            const data = await getDoc(docRef)
-            // console.log(data)
-            setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+            await onSnapshot(collection(docRef, 'colName'), (snapshot) =>
+                setUsers(snapshot.docs.map(d => ({ id: d.id, ...d.data() }))))
             // console.log(users)
         }
 
         getUser();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    useEffect(() => {
+        if (ref.current) {
+            ref.current = false
+        }
+        addAnimeinCol()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [existingCol])
 
     return (
         <>
@@ -76,7 +91,7 @@ export default function ButtonDrawer({ animeid }) {
                             autoComplete="off"
                         >
                             <Input placeholder="Add new collection" inputProps={ariaLabel} pattern="[A-Za-z0-9]+" onChange={(e) => {
-                                setNewCol(e.target.value)
+                                setNewCol(e.target.value.toLowerCase())
                             }} />
                             <Button sx={{
                                 width: 100,
@@ -85,8 +100,10 @@ export default function ButtonDrawer({ animeid }) {
                         {users.map((user) => {
                             return (
                                 <Button sx={{
-                                    width: 100,
-                                }} variant="contained" >{user.id}</Button>
+                                    width: 332, mt: 1,
+                                }} variant="contained" onClick={() => {
+                                    setExistingCol(user.id); handleClose();
+                                }} key={user.id}>{user.id}</Button>
                             )
                         })}
                     </Box>

@@ -43,10 +43,9 @@ export default function ButtonDrawer({ animeid }) {
     }
 
     const addAnimeinCol = async () => {
-        // await addDoc(AnimeListRef, { colName: existingCol, animeId: animeid, timestamp: serverTimestamp() })
+        await setDoc(doc(AnimeListRef, existingCol + "-" + animeid), { colName: existingCol, animeId: animeid, timestamp: serverTimestamp() })
         console.log(existingCol + ' run')
     }
-
 
     useEffect(() => {
         const getUser = async () => {
@@ -61,9 +60,11 @@ export default function ButtonDrawer({ animeid }) {
 
     useEffect(() => {
         if (ref.current) {
-            ref.current = false
+            ref.current = true
+            return
         }
         addAnimeinCol()
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [existingCol])
 
@@ -102,6 +103,7 @@ export default function ButtonDrawer({ animeid }) {
                                 <Button sx={{
                                     width: 332, mt: 1,
                                 }} variant="contained" onClick={() => {
+                                    ref.current = false;
                                     setExistingCol(user.id); handleClose();
                                 }} key={user.id}>{user.id}</Button>
                             )

@@ -61,19 +61,6 @@ const DescriptionBox = styled('div')`
     margin-bottom: 0.75rem;
 `
 
-// const ButtonAddList = styled('button')`
-//     padding-top: 1rem;
-//     padding-bottom: 1rem;
-//     padding-left: 1rem;
-//     padding-right: 1rem;
-//     font-size: 1.1rem;
-//     font-weight: 700;
-//     background: #3db4f2;
-//     color: #0B1622;
-//     border-radius: 10px;
-//     margin-bottom: 1rem;
-// `
-
 const AnimePage = () => {
 
     const currentPath = usePathname().substring(

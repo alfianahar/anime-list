@@ -32,18 +32,18 @@ export default function ButtonDrawer({ animeid }) {
     const ref = useRef(true)
 
     const docRef = doc(db, 'users', 'user1');
-    const ColNameRef = collection(db, 'users', 'user1', 'colName');
-    const AnimeListRef = collection(db, 'users', 'user1', 'animeList');
+    const colNameRef = collection(db, 'users', 'user1', 'colName');
+    const animeListRef = collection(db, 'users', 'user1', 'animeList');
     // console.log(docRef)
 
     const createCol = async () => {
         // console.log(colRef)
-        await setDoc(doc(ColNameRef, newCol), { colName: newCol })
-        await addDoc(AnimeListRef, { colName: newCol, animeId: animeid, timestamp: serverTimestamp() })
+        await setDoc(doc(colNameRef, newCol), { colName: newCol })
+        await addDoc(animeListRef, { colName: newCol, animeId: animeid, timestamp: serverTimestamp() })
     }
 
     const addAnimeinCol = async () => {
-        await setDoc(doc(AnimeListRef, existingCol + "-" + animeid), { colName: existingCol, animeId: animeid, timestamp: serverTimestamp() })
+        await setDoc(doc(animeListRef, existingCol + "-" + animeid), { colName: existingCol, animeId: animeid, timestamp: serverTimestamp() })
         console.log(existingCol + ' run')
     }
 

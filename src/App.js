@@ -8,6 +8,7 @@ import AnimePage from './page/AnimePage';
 import MainPage from './page/MainPage';
 import loading from './container/loading.svg'
 import CollectionPage from './page/CollectionPage';
+import ListColPage from './page/ListColPage';
 
 const GlobalStyles = css`
   * {
@@ -23,19 +24,9 @@ const GlobalStyles = css`
     line-height: 1.25rem;
     letter-spacing: 0.025em;
   }
-  a:link {
-    color: #c2d3cd;
-    background-color: transparent;
-    text-decoration: none;
-    }
-  a:visited {
-    color: #c2d3cd;
-    background-color: transparent;
-    text-decoration: none;
-    }
-  a:hover {
-    background-color: transparent;
-    }
+  a {
+    text-decoration: none !important;
+  }
 `
 
 const LoadContainer = styled('div')`
@@ -101,6 +92,7 @@ function App() {
           }>
             <Route path="/" element={<MainPage />} />
             <Route path="/anime/*" element={<AnimePage />} />
+            <Route path="/user/" element={<ListColPage />} />
             <Route path="/user/*" element={<CollectionPage />} />
             <Route
               path="*"

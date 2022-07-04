@@ -1,50 +1,92 @@
 import React, { useEffect, useState } from 'react'
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
+import ImageListItemBar from '@mui/material/ImageListItemBar';
+import ListSubheader from '@mui/material/ListSubheader';
+import IconButton from '@mui/material/IconButton';
+import InfoIcon from '@mui/icons-material/Info';
+import { useLocation } from 'react-router-dom';
+import { animebyId } from '../api/api';
 import { db } from '../firebase-config'
-import { collection, getDocs, addDoc, updateDoc, doc, deleteDoc } from 'firebase/firestore'
+import { collection, addDoc, doc, query, where, onSnapshot, getDocs } from 'firebase/firestore'
+
+const usePathname = () => {
+    const location = useLocation();
+    return location.pathname;
+}
 
 const CollectionPage = () => {
 
-    const [newName, setNewName] = useState('')
-    const [newAge, setNewAge] = useState(0)
+    const currentPath = usePathname().substring((usePathname().lastIndexOf("/")
+    ) + 1)
+    const colPath = currentPath
+    // console.log(colPath)
 
-    const [users, setUsers] = useState([])
-    const usersCollectionRef = collection(db, "users")
-
-    // const docRef = doc(db, 'users', 'L1L49RlWDcURYJn8vKDv');
-    // const colRef = collection(docRef, 'col1')
-    // // addDoc(colRef, { animeId: 21, timestamp: serverTimestamp() })
+    const [id, setId] = useState([])
+    const [list, setList] = useState([])
 
 
 
-    const createUser = async () => {
-        await addDoc(usersCollectionRef, { name: newName, age: Number(newAge) })
-    }
+    // const docRef = doc(db, 'users', 'user1');
+    // const colNameRef = collection(db, 'users', 'user1', 'colName');
+    const animeListRef = collection(db, 'users', 'user1', 'animeList');
 
-    const updateUser = async (id, age) => {
-        const userDoc = doc(db, 'users', id)
-        const newFields = { age: age + 1 }
-        await updateDoc(userDoc, newFields)
-    }
-
-    const deletUser = async (id) => {
-        const userDoc = doc(db, 'users', id)
-        await deleteDoc(userDoc)
-    }
 
     useEffect(() => {
-        const getUser = async () => {
-            const data = await getDocs(usersCollectionRef)
-            // console.log(data)
-            setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
-            // console.log(users)
-        }
+        const q = query(animeListRef, where("colName", "==", colPath));
 
-        getUser();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+        const getId = () => {
+            onSnapshot(q, (querySnapshot) => {
+                const animes = [];
+                querySnapshot.forEach((doc) => {
+                    // animebyId(doc.data().animeId).then((response) => animes.push(response.media[0]))
+                    animes.push(doc.data().animeId);
+                })
+                setId(animes)
+            })
+        }
+        getId()
+
     }, []);
+    console.log(id)
+
+    // useEffect(() => {
+    //     id.map((anime) => (
+    //         animebyId(anime).then((response) => setList(response.media))
+    //     ))
+    //     console.log(list)
+    // }, [])
 
     return (
         <div>
+            {/* <img src={list.coverImage.extraLarge} alt="sdasd" /> */}
+            {/* <ImageList sx={{ width: 500, height: 450 }}>
+                <ImageListItem key="Subheader" cols={2}>
+                    <ListSubheader component="div">{colPath}</ListSubheader>
+                </ImageListItem>
+                {id.map((item) => (
+                    <ImageListItem >
+                        <img
+                            src={`${item.coverImage.extraLarge}?w=248&fit=crop&auto=format`}
+                            srcSet={`${item.coverImage.extraLarge}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                            alt={item.title.english ? item.title.english : item.title.romaji}
+                            loading="lazy"
+                        />
+                        <ImageListItemBar
+                            title={item.title}
+                            actionIcon={
+                                <IconButton
+                                    sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
+                                    aria-label={`info about ${item.title.english ? item.title.english : item.title.romaji}`}
+                                >
+                                    <InfoIcon />
+                                </IconButton>
+                            }
+                        />
+                    </ImageListItem>
+                ))}
+            </ImageList> */}
+
             {/* <input
                 placeholder='Name...'
                 onChange={(e) => {

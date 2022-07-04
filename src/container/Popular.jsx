@@ -26,6 +26,10 @@ const SliderTitle = styled('nav')`
     line-height: 1.75rem;
 `
 
+const P = styled('p')`
+    color: #c2d3cd;
+`
+
 const Popular = () => {
 
     const [trends, setTrends] = useState([]);
@@ -37,6 +41,7 @@ const Popular = () => {
         animeData(1, 10, 'POPULARITY_DESC', 2022).then((response) => setPops(response.media))
         animeData(1, 10, 'POPULARITY_DESC', 2022, 'NOT_YET_RELEASED', 'SUMMER').then((response) => setUps(response.media))
     }, [])
+    console.log(ups)
     return (
         <>
             <SliderTitle>
@@ -53,7 +58,7 @@ const Popular = () => {
                     <SwiperSlide key={anime.id}>
                         <NavLink to={`/anime/${anime.id}/${anime.title.english ? anime.title.english.replaceAll(' ', '-') : anime.title.romaji.replaceAll(' ', '-')}`}>
                             <CoverImg src={anime.coverImage.extraLarge} alt={anime.id} />
-                            <p>{anime.title.english ? anime.title.english : anime.title.romaji}</p>
+                            <P>{anime.title.english ? anime.title.english : anime.title.romaji}</P>
 
                         </NavLink>
                     </SwiperSlide>
@@ -73,7 +78,7 @@ const Popular = () => {
                     <SwiperSlide key={anime.id}>
                         <NavLink to={`/anime/${anime.id}/${anime.title.english ? anime.title.english.replaceAll(' ', '-') : anime.title.romaji.replaceAll(' ', '-')}`}>
                             <CoverImg src={anime.coverImage.extraLarge} alt={anime.id} />
-                            <p>{anime.title.english ? anime.title.english : anime.title.romaji}</p>
+                            <P>{anime.title.english ? anime.title.english : anime.title.romaji}</P>
                         </NavLink>
                     </SwiperSlide>
                 ))}
@@ -92,7 +97,7 @@ const Popular = () => {
                     <SwiperSlide key={anime.id}>
                         <NavLink to={`/anime/${anime.id}/${anime.title.english ? anime.title.english.replaceAll(' ', '-') : anime.title.romaji.replaceAll(' ', '-')}`}>
                             <CoverImg src={anime.coverImage.extraLarge} alt={anime.id} />
-                            <p>{anime.title.english ? anime.title.english : anime.title.romaji}</p>
+                            <P>{anime.title.english ? anime.title.english : anime.title.romaji}</P>
                         </NavLink>
                     </SwiperSlide>
                 ))}

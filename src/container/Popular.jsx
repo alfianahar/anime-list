@@ -41,7 +41,7 @@ const Popular = () => {
         animeData(1, 10, 'POPULARITY_DESC', 2022).then((response) => setPops(response.media))
         animeData(1, 10, 'POPULARITY_DESC', 2022, 'NOT_YET_RELEASED', 'SUMMER').then((response) => setUps(response.media))
     }, [])
-    console.log(ups)
+    // console.log(ups)
     return (
         <>
             <SliderTitle>

@@ -11,6 +11,7 @@ import { db } from '../firebase-config'
 import { collection, query, where, onSnapshot } from 'firebase/firestore'
 import DeleteDialog from '../components/DeleteDialog';
 
+
 const usePathname = () => {
     const location = useLocation();
     return location.pathname;
@@ -19,6 +20,10 @@ const usePathname = () => {
 const ListContainer = styled('div')`
     padding-left: 1rem;
     padding-right: 1rem;    
+`
+
+const Img = styled('img')`
+    width: 100%  
 `
 
 const CollectionPage = () => {
@@ -69,25 +74,26 @@ const CollectionPage = () => {
 
                 <>
                     <ListContainer>
-                        <ImageList sx={{ width: '100%', height: '100%' }}>
+                        <ImageList sx={{ width: 'auto', height: '100%' }}>
                             <ImageListItem key="Subheader" cols={2}>
                                 <ListSubheader component="div" align="center" sx={{ bgcolor: '#151f2e', color: '#c2d3cd', borderRadius: '5px', fontWeight: 'bold', fontSize: '1.25rem' }}> {titlePath}</ListSubheader>
                             </ImageListItem>
                             {list.map((item) => (
-                                <ImageListItem key={item.id} sx={{ borderRadius: '5px', position: 'relative' }} >
-                                    {/* <NavLink to={`/anime/${item.id}/${item.title.english ? item.title.english.replaceAll(' ', '-') : item.title.romaji.replaceAll(' ', '-')}`}> */}
+                                <ImageListItem key={item.id} sx={{ borderRadius: '5px' }} >
+                                    <NavLink to={`/anime/${item.id}/${item.title.english ? item.title.english.replaceAll(' ', '-') : item.title.romaji.replaceAll(' ', '-')}`}>
 
-                                    <img
-                                        src={`${item.coverImage.extraLarge}?w=248&fit=crop&auto=format`}
-                                        srcSet={`${item.coverImage.extraLarge}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                                        alt={item.title.english ? item.title.english : item.title.romaji}
-                                        loading="lazy"
-                                    />
-                                    {/* </NavLink> */}
+                                        <Img
+                                            src={`${item.coverImage.extraLarge}?w=248&fit=crop&auto=format`}
+                                            srcSet={`${item.coverImage.extraLarge}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                                            alt={item.title.english ? item.title.english : item.title.romaji}
+                                            loading="lazy"
+                                        />
+
+
+                                    </NavLink>
                                     < ImageListItemBar
                                         title={item.title.english ? item.title.english : item.title.romaji}
                                         subtitle={item.author}
-                                        sx={{ position: 'absolute', zIndex: '100' }}
                                         actionIcon={
                                             <DeleteDialog item={item} col={colPath} />
                                         }

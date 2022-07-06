@@ -28,6 +28,10 @@ const SliderTitle = styled('nav')`
 
 const P = styled('p')`
     color: #c2d3cd;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    
 `
 
 const Popular = () => {

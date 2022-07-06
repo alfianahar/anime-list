@@ -51,7 +51,6 @@ const itemnBox = css`
 const ListColPage = () => {
 
     const [cols, setCols] = useState([])
-    const [bann, setBann] = useState([])
     const [data, setData] = useState()
 
 
@@ -91,7 +90,6 @@ const ListColPage = () => {
                     setData(animesNew);
                 })
             })
-            // setData(animes)
         }
         getAnime()
         // eslint-disable-next-line react-hooks/exhaustive-deps

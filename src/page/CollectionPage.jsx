@@ -61,10 +61,10 @@ const CollectionPage = () => {
         }
 
         getId()
-        console.log(list)
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+    console.log(list)
 
     return (
         <>

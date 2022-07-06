@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import Input from '@mui/material/Input';
 import { db } from '../firebase-config'
-import { collection, addDoc, doc, serverTimestamp, setDoc, onSnapshot } from 'firebase/firestore'
+import { collection, doc, serverTimestamp, setDoc, onSnapshot } from 'firebase/firestore'
 
 const ariaLabel = { 'aria-label': 'description' };
 
@@ -39,7 +39,8 @@ export default function ButtonDrawer({ animeid }) {
     const createCol = async () => {
         // console.log(colRef)
         await setDoc(doc(colNameRef, newCol), { colName: newCol })
-        await addDoc(animeListRef, { colName: newCol, animeId: animeid, timestamp: serverTimestamp() })
+        // await addDoc(animeListRef, { colName: newCol, animeId: animeid, timestamp: serverTimestamp() })
+        await setDoc(doc(animeListRef, newCol + "-" + animeid), { colName: newCol, animeId: animeid, timestamp: serverTimestamp() })
     }
 
     const addAnimeinCol = async () => {

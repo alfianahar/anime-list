@@ -1,12 +1,14 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import { styled } from '@mui/material/styles';
+import { animebyId } from '../api/api';
 import { db } from '../firebase-config'
-import { collection, doc, onSnapshot } from 'firebase/firestore'
+import { collection, doc, query, where, onSnapshot, limit } from 'firebase/firestore'
 import { NavLink } from 'react-router-dom';
+import CollectionCard from '../components/CollectionCard';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -48,32 +50,72 @@ const itemnBox = css`
 
 const ListColPage = () => {
 
-    const [users, setUsers] = useState([])
+    const [cols, setCols] = useState([])
+    const [bann, setBann] = useState([])
+    const [data, setData] = useState()
+
+
     const docRef = doc(db, 'users', 'user1');
+    // const colNameRef = collection(db, 'users', 'user1', 'colName');
+    const animeListRef = collection(db, 'users', 'user1', 'animeList');
+
+
 
     useEffect(() => {
         const getColName = async () => {
-            await onSnapshot(collection(docRef, 'colName'), (snapshot) =>
-                setUsers(snapshot.docs.map(d => ({ id: d.id, ...d.data() }))))
-            // console.log(users)
+            await onSnapshot(collection(docRef, 'colName'), (snapshot) => {
+                setCols(snapshot.docs.map(d => ({ id: d.id, ...d.data() })))
+                // console.log(cols.length)
+            })
         }
-
-        getColName();
+        getColName()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    useEffect(() => {
+        const getAnime = async () => {
+            let animes = [];
+            cols.forEach(col => {
+                const q = query(animeListRef, where("colName", "==", col.colName), limit(1))
+                onSnapshot(q, async (querySnapshot) => {
+                    querySnapshot.forEach(doc => {
+                        const anime = { ...doc.data(), id: doc.id };
+                        animes.push(anime);
+                        // console.log(anime)
+                    })
+                    const animesNew = [];
+                    for (let anime of animes) {
+                        const response = await animebyId(anime.animeId);
+                        animesNew.push({ col: anime.colName, data: response.media[0] });
+                    }
+                    setData(animesNew);
+                })
+            })
+            // setData(animes)
+        }
+        getAnime()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [cols]);
+    // console.log(cols)
+    // console.log(data)
+
     return (
         <ListContainer>
             <h1 css={css` ${title}`}>Collection List</h1>
-            <Stack spacing={2}>
-                {users.map((col) => (
-                    <NavLink to={`/user/${col.colName}`} key={col.colName}>
-                        <Item css={css` ${itemnBox}`} >
-                            {col.colName}
-                        </Item>
-
-                    </NavLink>
-                ))}
-            </Stack>
+            {data === undefined ?
+                <>still loading...</>
+                :
+                <Stack spacing={2}>
+                    {data.map((col) => (
+                        <NavLink to={`/user/${col.col}`} key={col.col}>
+                            <Item css={css` ${itemnBox}`} >
+                                {col.col}
+                            </Item>
+                        </NavLink>
+                    ))}
+                    <CollectionCard />
+                </Stack>
+            }
 
         </ListContainer >
 

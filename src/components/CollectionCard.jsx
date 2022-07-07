@@ -9,7 +9,7 @@ import defaultBann from './default-banner.jpg'
 import DeleteCol from './DeleteCol';
 import RenameCol from './RenameCol';
 
-export default function CollectionCard({ data }) {
+export default function CollectionCard({ data, animeRef, colRef }) {
     return (
         <Card sx={{ maxWidth: '100%', bgcolor: '#c2d3cd' }}>
             <CardActionArea>
@@ -26,9 +26,9 @@ export default function CollectionCard({ data }) {
                     </Typography>
                 </CardContent>
             </CardActionArea>
-            <CardActions>
+            <CardActions sx={{ paddingY: "0px" }}>
                 <RenameCol />
-                <DeleteCol />
+                <DeleteCol data={data} animeRef={animeRef} colRef={colRef} />
             </CardActions>
         </Card>
     );

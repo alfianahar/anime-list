@@ -32,14 +32,15 @@ const title = css`
     text-align: center;
 `
 
+const docRef = doc(db, 'users', 'user1');
+const colNameRef = collection(db, 'users', 'user1', 'colName');
+const animeListRef = collection(db, 'users', 'user1', 'animeList');
+
 const ListColPage = () => {
 
     const [cols, setCols] = useState([])
     const [data, setData] = useState()
 
-    const docRef = doc(db, 'users', 'user1');
-    // const colNameRef = collection(db, 'users', 'user1', 'colName');
-    const animeListRef = collection(db, 'users', 'user1', 'animeList');
 
     useEffect(() => {
         const getColName = async () => {
@@ -49,7 +50,6 @@ const ListColPage = () => {
             })
         }
         getColName()
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     useEffect(() => {
@@ -73,10 +73,10 @@ const ListColPage = () => {
             })
         }
         getAnime()
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [cols]);
     // console.log(cols)
     console.log(data)
+
 
     return (
         <ListContainer>
@@ -86,7 +86,7 @@ const ListColPage = () => {
                 :
                 <Stack spacing={2}>
                     {data.map((col) => (
-                        <CollectionCard data={col} key={col.col} />
+                        <CollectionCard data={col} animeRef={animeListRef} colRef={colNameRef} key={col.col} />
                     ))}
                 </Stack>
             }

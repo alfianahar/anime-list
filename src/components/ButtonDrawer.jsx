@@ -93,7 +93,7 @@ export default function ButtonDrawer({ animeid }) {
                             autoComplete="off"
                         >
                             <Input placeholder="Add new collection" inputProps={ariaLabel} value={newCol} onChange={(e) => {
-                                setNewCol(e.target.value.toLowerCase().replace(/[^\w\s]/gi, ''))
+                                setNewCol(e.target.value.toLowerCase().replace(/[^\w]/gi, ''))
                             }} />
                             <Button sx={{
                                 width: 100,

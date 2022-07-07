@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-// import { db } from '../firebase-config'
-// import { doc, deleteDoc } from 'firebase/firestore'
+import { doc, deleteDoc, getDocs, query, where } from 'firebase/firestore'
 
-export default function DeleteCol({ item, col }) {
-    const [open, setOpen] = React.useState(false);
+export default function DeleteCol({ data, animeRef, colRef }) {
+
+    const [open, setOpen] = useState(false);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -19,10 +19,23 @@ export default function DeleteCol({ item, col }) {
         setOpen(false);
     };
 
-    // const deleteAnime = async (id) => {
-    //     const animeDoc = doc(db, 'users', 'user1', 'animeList', col + '-' + id);
-    //     await deleteDoc(animeDoc)
-    // }
+
+
+    const deleteCol = async (col) => {
+        const animeCol = doc(colRef, col);
+        const q = query(animeRef, where("colName", "==", col))
+        const snapshot = await getDocs(q)
+
+        const result = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+
+        await deleteDoc(animeCol)
+        result.forEach(async (result) => {
+            const animeDoc = doc(animeRef, result.id);
+            await deleteDoc(animeDoc)
+        })
+        // console.log(result)
+    }
+
 
     return (
         <div>
@@ -46,7 +59,7 @@ export default function DeleteCol({ item, col }) {
                 <DialogActions>
                     <Button onClick={handleClose}>No</Button>
                     <Button onClick={() => {
-                        // deleteAnime(item.id); 
+                        deleteCol(data.col);
                         handleClose()
                     }} autoFocus>
                         Yes

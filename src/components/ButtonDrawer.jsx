@@ -34,7 +34,7 @@ export default function ButtonDrawer({ animeid }) {
     const docRef = doc(db, 'users', 'user1');
     const colNameRef = collection(db, 'users', 'user1', 'colName');
     const animeListRef = collection(db, 'users', 'user1', 'animeList');
-    // console.log(docRef)
+    console.log(newCol)
 
     const createCol = async () => {
         // console.log(colRef)
@@ -92,8 +92,8 @@ export default function ButtonDrawer({ animeid }) {
                             noValidate
                             autoComplete="off"
                         >
-                            <Input placeholder="Add new collection" inputProps={ariaLabel} pattern="[A-Za-z0-9]+" onChange={(e) => {
-                                setNewCol(e.target.value.toLowerCase())
+                            <Input placeholder="Add new collection" inputProps={ariaLabel} value={newCol} onChange={(e) => {
+                                setNewCol(e.target.value.toLowerCase().replace(/[^\w\s]/gi, ''))
                             }} />
                             <Button sx={{
                                 width: 100,

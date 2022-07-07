@@ -31,7 +31,10 @@ const P = styled('p')`
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    
+`
+
+const A = styled('a')`
+    color: #fff;
 `
 
 const Popular = () => {
@@ -50,7 +53,7 @@ const Popular = () => {
         <>
             <SliderTitle>
                 <h4>Trending Sekarang</h4>
-                <a href="/trendinglist">Lebih banyak</a>
+                <A href="/trendinglist">Lebih banyak</A>
             </SliderTitle>
             <Swiper
                 slidesPerView={3.1}
@@ -70,7 +73,7 @@ const Popular = () => {
             </Swiper>
             <SliderTitle>
                 <h4>Popular Season Ini</h4>
-                <a href='/popularlist'>Lebih banyak</a>
+                <A href='/popularlist'>Lebih banyak</A>
             </SliderTitle>
             <Swiper
                 slidesPerView={3.1}
@@ -89,7 +92,7 @@ const Popular = () => {
             </Swiper>
             <SliderTitle>
                 <h4>Akan Hadir</h4>
-                <a href='/upcominglist'>Lebih banyak</a>
+                <A href='/upcominglist'>Lebih banyak</A>
             </SliderTitle>
             <Swiper
                 slidesPerView={3.1}

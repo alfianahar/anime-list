@@ -32,26 +32,14 @@ const title = css`
     text-align: center;
 `
 
-const float = css`
-    margin: 0;
-    top: 'auto';
-    right: 20;
-    bottom: 20;
-    left: 'auto';
-    position: 'fixed';
-`
-
 const ListColPage = () => {
 
     const [cols, setCols] = useState([])
     const [data, setData] = useState()
 
-
     const docRef = doc(db, 'users', 'user1');
     // const colNameRef = collection(db, 'users', 'user1', 'colName');
     const animeListRef = collection(db, 'users', 'user1', 'animeList');
-
-
 
     useEffect(() => {
         const getColName = async () => {

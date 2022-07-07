@@ -9,7 +9,7 @@ import defaultBann from './default-banner.jpg'
 
 export default function CollectionCard({ data }) {
     return (
-        <Card sx={{ maxWidth: '100%' }}>
+        <Card sx={{ maxWidth: '100%', bgcolor: '#c2d3cd' }}>
             <CardActionArea>
                 <CardMedia
                     component={NavLink}
@@ -19,7 +19,7 @@ export default function CollectionCard({ data }) {
                     sx={{ aspectRatio: '4.75 / 1' }}
                 />
                 <CardContent sx={{ paddingY: "8px" }}>
-                    <Typography variant="h5" component="div" >
+                    <Typography variant="h5" component="div" sx={{ fontWeight: '700' }}>
                         {data.col}
                     </Typography>
                 </CardContent>

@@ -7,6 +7,7 @@ import { animebyId } from '../api/api';
 import { db } from '../firebase-config'
 import { collection, doc, query, where, onSnapshot, limit } from 'firebase/firestore'
 import CollectionCard from '../components/CollectionCard';
+import FloatAddCol from '../components/FloatAddCol';
 
 const ListContainer = styled('div')`
     display: flex;
@@ -29,6 +30,15 @@ const title = css`
     letter-spacing: 0.05em;
     font-weight: 700;
     text-align: center;
+`
+
+const float = css`
+    margin: 0;
+    top: 'auto';
+    right: 20;
+    bottom: 20;
+    left: 'auto';
+    position: 'fixed';
 `
 
 const ListColPage = () => {
@@ -92,7 +102,7 @@ const ListColPage = () => {
                     ))}
                 </Stack>
             }
-
+            <FloatAddCol />
         </ListContainer >
 
     )

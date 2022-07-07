@@ -6,6 +6,8 @@ import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import defaultBann from './default-banner.jpg'
+import DeleteCol from './DeleteCol';
+import RenameCol from './RenameCol';
 
 export default function CollectionCard({ data }) {
     return (
@@ -16,7 +18,7 @@ export default function CollectionCard({ data }) {
                     to={`/user/${data.col}`}
                     image={data.data.bannerImage ? data.data.bannerImage : data.data.coverImage.extraLarge ? data.data.coverImage.extraLarge : defaultBann}
                     alt={data.col}
-                    sx={{ aspectRatio: '4.75 / 1' }}
+                    sx={{ aspectRatio: '3.5 / 1' }}
                 />
                 <CardContent sx={{ paddingY: "8px" }}>
                     <Typography variant="h5" component="div" sx={{ fontWeight: '700' }}>
@@ -25,12 +27,8 @@ export default function CollectionCard({ data }) {
                 </CardContent>
             </CardActionArea>
             <CardActions>
-                <Button size="medium" color="primary">
-                    Rename
-                </Button>
-                <Button size="medium" color="warning">
-                    Delete
-                </Button>
+                <RenameCol />
+                <DeleteCol />
             </CardActions>
         </Card>
     );

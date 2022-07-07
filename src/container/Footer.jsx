@@ -22,7 +22,7 @@ const pulse = keyframes`
     }
     50% { 
         opacity: 1.0;
-        transform: scale(1.1);
+        
     }
     100% { 
         opacity: 0.5;
@@ -32,7 +32,7 @@ const pulse = keyframes`
 const Footer = () => {
     return (
         <FooterTitle>
-            Made with <span>&nbsp;&#10084;&#65039;&nbsp;</span> by <A css={css` animation: ${pulse} 3s ease-out infinite;`} href='https://www.alfianahar.com/bio' target='_blank' rel='noopener noreferrer' >&nbsp; &nbsp;Alfian Nahar</A>
+            Made with <span>&nbsp;&#10084;&#65039;&nbsp;</span> by <A css={css` animation: ${pulse} 3s ease-out infinite;`} href='https://www.alfianahar.com/bio' target='_blank' rel='noopener noreferrer' >&nbsp;Alfian Nahar</A>
         </FooterTitle >
     )
 }

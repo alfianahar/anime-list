@@ -5,12 +5,10 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import IconButton from '@mui/material/IconButton';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import { db } from '../firebase-config'
-import { doc, deleteDoc } from 'firebase/firestore'
+// import { db } from '../firebase-config'
+// import { doc, deleteDoc } from 'firebase/firestore'
 
-export default function DeleteDialog({ item, col }) {
+export default function DeleteCol({ item, col }) {
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
@@ -21,20 +19,16 @@ export default function DeleteDialog({ item, col }) {
         setOpen(false);
     };
 
-    const deleteAnime = async (id) => {
-        const animeDoc = doc(db, 'users', 'user1', 'animeList', col + '-' + id);
-        await deleteDoc(animeDoc)
-    }
+    // const deleteAnime = async (id) => {
+    //     const animeDoc = doc(db, 'users', 'user1', 'animeList', col + '-' + id);
+    //     await deleteDoc(animeDoc)
+    // }
 
     return (
         <div>
-            <IconButton
-                onClick={handleClickOpen}
-                sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
-                aria-label={`info about ${item.title.english ? item.title.english : item.title.romaji}`}
-            >
-                <DeleteForeverIcon />
-            </IconButton>
+            <Button size="medium" color="warning" onClick={handleClickOpen}>
+                Delete
+            </Button>
             <Dialog
                 open={open}
                 onClose={handleClose}
@@ -42,16 +36,19 @@ export default function DeleteDialog({ item, col }) {
                 aria-describedby="alert-dialog-description"
             >
                 <DialogTitle id="alert-dialog-title">
-                    {"Delete This List From Collection"}
+                    {"Delete This Collection"}
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
-                        Are you sure to delete this list from your collection?
+                        Are you sure to delete this collection?
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>No</Button>
-                    <Button onClick={() => { deleteAnime(item.id); handleClose() }} autoFocus>
+                    <Button onClick={() => {
+                        // deleteAnime(item.id); 
+                        handleClose()
+                    }} autoFocus>
                         Yes
                     </Button>
                 </DialogActions>

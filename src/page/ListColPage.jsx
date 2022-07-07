@@ -1,22 +1,12 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { useEffect, useState } from 'react'
-import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import { styled } from '@mui/material/styles';
 import { animebyId } from '../api/api';
 import { db } from '../firebase-config'
 import { collection, doc, query, where, onSnapshot, limit } from 'firebase/firestore'
-import { NavLink } from 'react-router-dom';
 import CollectionCard from '../components/CollectionCard';
-
-const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-}));
 
 const ListContainer = styled('div')`
     display: flex;
@@ -35,17 +25,10 @@ const ListContainer = styled('div')`
 const title = css`
     font-size: 1.5rem; 
     line-height: 2rem;
-    padding-top: 1.25rem;
     padding-bottom: 1.25rem;
     letter-spacing: 0.05em;
     font-weight: 700;
     text-align: center;
-`
-
-const itemnBox = css`
-    background: #151f2e;
-    border-radius: 10px;
-    color: #c2d3cd;
 `
 
 const ListColPage = () => {
@@ -95,7 +78,7 @@ const ListColPage = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [cols]);
     // console.log(cols)
-    // console.log(data)
+    console.log(data)
 
     return (
         <ListContainer>
@@ -105,13 +88,8 @@ const ListColPage = () => {
                 :
                 <Stack spacing={2}>
                     {data.map((col) => (
-                        <NavLink to={`/user/${col.col}`} key={col.col}>
-                            <Item css={css` ${itemnBox}`} >
-                                {col.col}
-                            </Item>
-                        </NavLink>
+                        <CollectionCard data={col} key={col.col} />
                     ))}
-                    <CollectionCard />
                 </Stack>
             }
 

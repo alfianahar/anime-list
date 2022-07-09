@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { animebyId } from '../api/api';
 import AddAnimeToCol from '../components/AddAnimeToCol';
+import Loading from '../container/Loading';
 
 const usePathname = () => {
     const location = useLocation();
@@ -81,7 +82,7 @@ const AnimePage = () => {
     return (
         <>
             {detail === undefined ?
-                <></> :
+                <Loading /> :
                 <AnimePageContainer>
                     <CoverImg src={detail.coverImage.extraLarge} alt={detail.id} />
                     <p css={css` ${title} `} >{detail.title.english ? detail.title.english : detail.title.romaji}</p>

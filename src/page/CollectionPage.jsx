@@ -10,6 +10,7 @@ import { animebyId } from '../api/api';
 import { db } from '../firebase-config'
 import { collection, query, where, onSnapshot } from 'firebase/firestore'
 import DeleteDialog from '../components/DeleteDialog';
+import Loading from '../container/Loading';
 
 
 const usePathname = () => {
@@ -70,7 +71,7 @@ const CollectionPage = () => {
         <>
 
             {list === undefined ?
-                <>still Loading.....</> :
+                <Loading /> :
 
                 <>
                     <ListContainer>

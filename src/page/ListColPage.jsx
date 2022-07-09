@@ -10,6 +10,7 @@ import CollectionCard from '../components/CollectionCard';
 import Box from '@mui/material/Box';
 import Fab from '@mui/material/Fab';
 import AddCol from '../components/AddCol';
+import Loading from '../container/Loading';
 
 const ListContainer = styled('div')`
     display: flex;
@@ -84,7 +85,7 @@ const ListColPage = () => {
         <ListContainer>
             <h1 css={css` ${title}`}>Collection List</h1>
             {data === undefined ?
-                <>still loading...</>
+                <Loading />
                 :
                 <Stack spacing={2}>
                     {data.map((col) => (

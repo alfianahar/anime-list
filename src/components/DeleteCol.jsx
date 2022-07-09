@@ -59,7 +59,7 @@ export default function DeleteCol({ data, animeRef, colRef }) {
                 <DialogActions>
                     <Button onClick={handleClose}>No</Button>
                     <Button onClick={() => {
-                        deleteCol(data.col);
+                        deleteCol(data.colName);
                         handleClose()
                     }} autoFocus>
                         Yes

@@ -44,7 +44,6 @@ const ListColPage = () => {
     const [cols, setCols] = useState([])
     const [data, setData] = useState()
 
-
     useEffect(() => {
         const getColName = async () => {
             await onSnapshot(collection(docRef, 'colName'), (snapshot) => {
@@ -69,7 +68,7 @@ const ListColPage = () => {
                     const animesNew = [];
                     for (let anime of animes) {
                         const response = await animebyId(anime.animeId);
-                        animesNew.push({ col: anime.colName, data: response.media[0] });
+                        animesNew.push({ id: anime.colName, colName: anime.colName, data: response.media[0] });
                     }
                     setData(animesNew);
                 })
@@ -77,9 +76,8 @@ const ListColPage = () => {
         }
         getAnime()
     }, [cols]);
-    console.log(cols)
+    // console.log([...data, ...cols.filter(d => !(new Set(data.map(d => d.id))).has(d.id))])
     // console.log(data)
-
 
     return (
         <ListContainer>
@@ -88,8 +86,8 @@ const ListColPage = () => {
                 <Loading />
                 :
                 <Stack spacing={2}>
-                    {data.map((col) => (
-                        <CollectionCard data={col} animeRef={animeListRef} colRef={colNameRef} key={col.col} />
+                    {[...data, ...cols.filter(d => !(new Set(data.map(d => d.id))).has(d.id))].map((col) => (
+                        <CollectionCard data={col} animeRef={animeListRef} colRef={colNameRef} key={col.id} />
                     ))}
                 </Stack>
             }

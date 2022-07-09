@@ -23,10 +23,14 @@ const style = {
 
 export default function AddCol({ colRef }) {
     const [open, setOpen] = useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
-
     const [newCol, setNewCol] = useState('')
+
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => {
+        setOpen(false);
+        setNewCol('');
+    }
+
 
     const createNewCol = async () => {
         // console.log(colRef)

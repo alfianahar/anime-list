@@ -7,7 +7,9 @@ import { animebyId } from '../api/api';
 import { db } from '../firebase-config'
 import { collection, doc, query, where, onSnapshot, limit } from 'firebase/firestore'
 import CollectionCard from '../components/CollectionCard';
-import FloatAddCol from '../components/FloatAddCol';
+import Box from '@mui/material/Box';
+import Fab from '@mui/material/Fab';
+import AddCol from '../components/AddCol';
 
 const ListContainer = styled('div')`
     display: flex;
@@ -74,8 +76,8 @@ const ListColPage = () => {
         }
         getAnime()
     }, [cols]);
-    // console.log(cols)
-    console.log(data)
+    console.log(cols)
+    // console.log(data)
 
 
     return (
@@ -90,7 +92,11 @@ const ListColPage = () => {
                     ))}
                 </Stack>
             }
-            <FloatAddCol />
+            <Box sx={{ top: 'auto', right: '20px', bottom: '20px', left: 'auto', position: 'fixed', '& > :not(style)': { m: 1 } }}>
+                <Fab color="primary" aria-label="add">
+                    <AddCol colRef={colNameRef} />
+                </Fab>
+            </Box>
         </ListContainer >
 
     )

@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { animebyId } from '../api/api';
-import ButtonDrawer from '../components/ButtonDrawer';
+import AddAnimeToCol from '../components/AddAnimeToCol';
 
 const usePathname = () => {
     const location = useLocation();
@@ -85,7 +85,7 @@ const AnimePage = () => {
                 <AnimePageContainer>
                     <CoverImg src={detail.coverImage.extraLarge} alt={detail.id} />
                     <p css={css` ${title} `} >{detail.title.english ? detail.title.english : detail.title.romaji}</p>
-                    <ButtonDrawer animeid={detail.id} />
+                    <AddAnimeToCol animeid={detail.id} />
                     <div>
                         <p css={css` ${subtitle}`}>Genres</p>
                         <DescriptionBox >
